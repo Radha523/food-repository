@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foodie - Online Food Delivery</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #fff8f0;
+    color: #333;
+}
+
+/* HEADER */
+
+header {
+    background: linear-gradient(120deg, #ff512f, #f09819);
+    color: white;
+    padding: 22px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #ffe600;
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 12px;
+    font-weight: bold;
+}
+
+.cart-button {
+    background: white;
+    color: #ff512f;
+    padding: 12px 20px;
+    border-radius: 25px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 330px;
+    padding: 65px 7%;
+    background: linear-gradient(120deg, #ff9966, #ff5e62);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.hero h1 {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 19px;
+    margin-bottom: 20px;
+}
+
+.hero button {
+    padding: 14px 28px;
+    background: #ffe600;
+    border: none;
+    border-radius: 30px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.hero img {
+    width: 280px;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 8px solid white;
+}
+
+/* SEARCH */
+
+.search-area {
+    text-align: center;
+    padding: 35px 15px;
+}
+
+.search-area input {
+    width: 80%;
+    max-width: 600px;
+    padding: 16px;
+    border: 2px solid #ff7043;
+    border-radius: 30px;
+    font-size: 16px;
+    outline: none;
+}
+
+/* CATEGORIES */
+
+.categories {
+    padding: 20px 5%;
+    text-align: center;
+}
+
+.categories h2 {
+    margin-bottom: 25px;
+    font-size: 30px;
+    color: #e64a19;
+}
+
+.category-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.category-list button {
+    padding: 13px 23px;
+    border: none;
+    border-radius: 25px;
+    background: #ffe0b2;
+    color: #bf360c;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.category-list button.active,
+.category-list button:hover {
+    background: #ff5722;
+    color: white;
+}
+
+/* FOOD ITEMS */
+
+.menu {
+    padding: 35px 5%;
+}
+
+.menu h2 {
+    text-align: center;
+    color: #e64a19;
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+.food-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.food-card {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+    transition: 0.3s;
+}
+
+.food-card:hover {
+    transform: translateY(-7px);
+}
+
+.food-card img {
+    width: 100%;
+    height: 175px;
+    object-fit: cover;
+    background: #ffe0b2;
+}
+
+.food-info {
+    padding: 16px;
+}
+
+.food-info h3 {
+    font-size: 19px;
+    margin-bottom: 8px;
+}
+
+.food-info p {
+    color: #777;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.price {
+    color: #e65100;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.food-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.add-btn {
+    background: #ff5722;
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.add-btn:hover {
+    background: #e64a19;
+}
+
+/* CART */
+
+.cart-section {
+    padding: 40px 6%;
+    background: #fff0dc;
+}
+
+.cart-section h2 {
+    color: #e64a19;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 30px;
+}
+
+.cart-item {
+    background: white;
+    padding: 15px;
+    margin: 10px auto;
+    max-width: 700px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity button {
+    padding: 5px 12px;
+    background: #ff7043;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.total {
+    text-align: center;
+    margin: 25px;
+    font-size: 25px;
+    font-weight: bold;
+    color: #e65100;
+}
+
+.order-btn {
+    display: block;
+    margin: auto;
+    padding: 15px 35px;
+    border: none;
+    border-radius: 30px;
+    background: #2eaf50;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* FOOTER */
+
+footer {
+    background: #292929;
+    color: white;
+    text-align: center;
+    padding: 30px;
+    margin-top: 30px;
+}
+
+footer p {
+    margin: 8px;
+}
+
+@media(max-width:600px) {
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .hero img {
+        width: 200px;
+        height: 180px;
+    }
+
+    header {
+        justify-content: center;
+    }
+
+    .cart-item {
+        flex-wrap: wrap;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🍴 Food<span>ie</span></div>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#menu">Menu</a>
+        <a href="#cart">Cart</a>
+    </nav>
+
+    <button class="cart-button" onclick="goToCart()">
+        🛒 Cart (<span id="cartCount">0</span>)
+    </button>
+</header>
+
+<section class="hero">
+
+    <div>
+        <h1>Delicious Food<br>Delivered To You!</h1>
+        <p>Fresh food, amazing taste and fast delivery.</p>
+        <button onclick="document.getElementById('menu').scrollIntoView()">
+            Order Now 🍕
+        </button>
+    </div>
+
+    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500"
+         alt="Delicious pizza">
+
+</section>
+
+<section class="search-area">
+    <input type="text" id="search"
+    placeholder="🔍 Search your favourite food..."
+    oninput="displayFoods()">
+</section>
+
+<section class="categories">
+
+    <h2>Explore Categories</h2>
+
+    <div class="category-list">
+
+        <button class="active" onclick="filterFood('All',this)">All Foods</button>
+        <button onclick="filterFood('Breakfast',this)">🍳 Breakfast</button>
+        <button onclick="filterFood('Lunch',this)">🍛 Lunch</button>
+        <button onclick="filterFood('Dinner',this)">🍗 Dinner</button>
+        <button onclick="filterFood('Snacks',this)">🍟 Snacks</button>
+        <button onclick="filterFood('Desserts',this)">🍰 Desserts</button>
+        <button onclick="filterFood('Drinks',this)">🥤 Drinks</button>
+
+    </div>
+
+</section>
+
+<section class="menu" id="menu">
+
+    <h2>Our Delicious Menu 🍽️</h2>
+
+    <div class="food-container" id="foodContainer"></div>
+
+</section>
+
+<section class="cart-section" id="cart">
+
+    <h2>🛒 Your Shopping Cart</h2>
+
+    <div id="cartItems">
+        <p style="text-align:center;">Your cart is empty!</p>
+    </div>
+
+    <div class="total">
+        Total: ₹<span id="total">0</span>
+    </div>
+
+    <button class="order-btn" onclick="placeOrder()">
+        Place Your Order 🚀
+    </button>
+
+</section>
+
+<footer>
+
+    <h2>🍴 Foodie Online Food Delivery</h2>
+
+    <p>Delicious Food | Fast Delivery | Best Quality</p>
+
+    <p>Contact: foodie@example.com</p>
+
+    <p>© 2026 Foodie. All Rights Reserved.</p>
+
+</footer>
+
+<script>
+
+// FOOD DATABASE - 56 ITEMS
+
+const foods = [
+
+{id:1,name:"Masala Dosa",price:80,cat:"Breakfast",img:"https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=500"},
+{id:2,name:"Idli Sambar",price:50,cat:"Breakfast",img:"https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=500"},
+{id:3,name:"Medu Vada",price:60,cat:"Breakfast",img:"https://images.unsplash.com/photo-1601050690597-df0568f70950?w=500"},
+{id:4,name:"Poori Masala",price:70,cat:"Breakfast",img:"https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=500"},
+{id:5,name:"Pongal",price:65,cat:"Breakfast",img:"https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?w=500"},
+{id:6,name:"Upma",price:45,cat:"Breakfast",img:"https://images.unsplash.com/photo-1596797038530-2c107229654b?w=500"},
+{id:7,name:"Onion Dosa",price:90,cat:"Breakfast",img:"https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=500"},
+{id:8,name:"Ghee Roast Dosa",price:100,cat:"Breakfast",img:"https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=500"},
+{id:9,name:"Veg Sandwich",price:70,cat:"Breakfast",img:"https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=500"},
+
+{id:10,name:"Chicken Biryani",price:220,cat:"Lunch",img:"https://images.unsplash.com/photo-1563379091339-03246963d96c?w=500"},
+{id:11,name:"Veg Biryani",price:150,cat:"Lunch",img:"https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=500"},
+{id:12,name:"Mutton Biryani",price:280,cat:"Lunch",img:"https://images.unsplash.com/photo-1563379091339-03246963d96c?w=500"},
+{id:13,name:"Egg Biryani",price:160,cat:"Lunch",img:"https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=500"},
+{id:14,name:"Chicken Fried Rice",price:170,cat:"Lunch",img:"https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=500"},
+{id:15,name:"Veg Fried Rice",price:130,cat:"Lunch",img:"https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=500"},
+{id:16,name:"Paneer Butter Masala",price:180,cat:"Lunch",img:"https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=500"},
+{id:17,name:"Chicken Curry",price:190,cat:"Lunch",img:"https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=500"},
+{id:18,name:"Veg Meals",price:120,cat:"Lunch",img:"https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=500"},
+{id:19,name:"Chicken Noodles",price:160,cat:"Lunch",img:"https://images.unsplash.com/photo-1585032226651-759b368d7246?w=500"},
+{id:20,name:"Veg Noodles",price:120,cat:"Lunch",img:"https://images.unsplash.com/photo-1585032226651-759b368d7246?w=500"},
+
+{id:21,name:"Butter Chicken",price:220,cat:"Dinner",img:"https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=500"},
+{id:22,name:"Chicken Tikka",price:240,cat:"Dinner",img:"https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=500"},
+{id:23,name:"Tandoori Chicken",price:280,cat:"Dinner",img:"https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=500"},
+{id:24,name:"Palak Paneer",price:160,cat:"Dinner",img:"https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=500"},
+{id:25,name:"Dal Tadka",price:120,cat:"Dinner",img:"https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=500"},
+{id:26,name:"Chapati",price:20,cat:"Dinner",img:"https://images.unsplash.com/photo-1601050690597-df0568f70950?w=500"},
+{id:27,name:"Garlic Naan",price:45,cat:"Dinner",img:"https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?w=500"},
+{id:28,name:"Fish Curry",price:220,cat:"Dinner",img:"https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?w=500"},
+
+{id:29,name:"Veg Burger",price:100,cat:"Snacks",img:"https://images.unsplash.com/photo-1520072959219-c595dc870360?w=500"},
+{id:30,name:"Chicken Burger",price:150,cat:"Snacks",img:"https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500"},
+{id:31,name:"French Fries",price:80,cat:"Snacks",img:"https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=500"},
+{id:32,name:"Margherita Pizza",price:180,cat:"Snacks",img:"https://images.unsplash.com/photo-1579751626657-72bc17010498?w=500"},
+{id:33,name:"Pepperoni Pizza",price:250,cat:"Snacks",img:"https://images.unsplash.com/photo-1628840042765-356cda07504e?w=500"},
+{id:34,name:"Veg Sandwich",price:90,cat:"Snacks",img:"https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=500"},
+{id:35,name:"Chicken Sandwich",price:130,cat:"Snacks",img:"https://images.unsplash.com/photo-1553909489-cd47e0ef937f?w=500"},
+{id:36,name:"Samosa",price:20,cat:"Snacks",img:"https://images.unsplash.com/photo-1601050690597-df0568f70950?w=500"},
+{id:37,name:"Spring Rolls",price:100,cat:"Snacks",img:"https://images.unsplash.com/photo-1544025162-d76694265947?w=500"},
+{id:38,name:"Pani Puri",price:40,cat:"Snacks",img:"https://images.unsplash.com/photo-1601050690597-df0568f70950?w=500"},
+
+{id:39,name:"Chocolate Cake",price:120,cat:"Desserts",img:"https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500"},
+{id:40,name:"Black Forest Cake",price:150,cat:"Desserts",img:"https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500"},
+{id:41,name:"Chocolate Ice Cream",price:80,cat:"Desserts",img:"https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=500"},
+{id:42,name:"Vanilla Ice Cream",price:70,cat:"Desserts",img:"https://images.unsplash.com/photo-1501446529957-6226bd447c46?w=500"},
+{id:43,name:"Gulab Jamun",price:60,cat:"Desserts",img:"https://images.unsplash.com/photo-1666190092159-3a3e1c5a5b3d?w=500"},
+{id:44,name:"Brownie",price:100,cat:"Desserts",img:"https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=500"},
+{id:45,name:"Pancakes",price:110,cat:"Desserts",img:"https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=500"},
+
+{id:46,name:"Mango Juice",price:60,cat:"Drinks",img:"https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=500"},
+{id:47,name:"Orange Juice",price:70,cat:"Drinks",img:"https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=500"},
+{id:48,name:"Strawberry Milkshake",price:100,cat:"Drinks",img:"https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=500"},
+{id:49,name:"Chocolate Milkshake",price:110,cat:"Drinks",img:"https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=500"},
+{id:50,name:"Cold Coffee",price:90,cat:"Drinks",img:"https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=500"},
+{id:51,name:"Lemon Juice",price:40,cat:"Drinks",img:"https://images.unsplash.com/photo-1513558161293-cdaf765edfd4?w=500"},
+{id:52,name:"Fresh Lime Soda",price:50,cat:"Drinks",img:"https://images.unsplash.com/photo-1513558161293-cdaf765edfd4?w=500"},
+{id:53,name:"Watermelon Juice",price:60,cat:"Drinks",img:"https://images.unsplash.com/photo-1525385133512-2f3bdd039054?w=500"},
+{id:54,name:"Lassi",price:60,cat:"Drinks",img:"https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=500"},
+{id:55,name:"Coffee",price:40,cat:"Drinks",img:"https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=500"},
+{id:56,name:"Tea",price:20,cat:"Drinks",img:"https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=500"}
+
+];
+
+// CART
+
+let cart = [];
+let currentCategory = "All";
+
+// DISPLAY FOOD
+
+function displayFoods() {
+
+    const container = document.getElementById("foodContainer");
+
+    const search = document.getElementById("search").value.toLowerCase();
+
+    container.innerHTML = "";
+
+    const filtered = foods.filter(food => {
+
+        const matchesSearch = food.name.toLowerCase().includes(search);
+
+        const matchesCategory =
+        currentCategory === "All" || food.cat === currentCategory;
+
+        return matchesSearch && matchesCategory;
+
+    });
+
+    if(filtered.length === 0) {
+        container.innerHTML = "<h3>No food items found!</h3>";
+        return;
+    }
+
+    filtered.forEach(food => {
+
+        container.innerHTML += `
+
+        <div class="food-card">
+
+            <img src="${food.img}"
+                 alt="${food.name}"
+                 loading="lazy"
+                 onerror="this.onerror=null;this.src='https://placehold.co/500x300/ffe0b2/e65100?text=Food+Image'">
+
+            <div class="food-info">
+
+                <h3>${food.name}</h3>
+
+                <p>🍽️ ${food.cat} | Fresh & Delicious</p>
+
+                <div class="food-bottom">
+
+                    <span class="price">₹${food.price}</span>
+
+                    <button class="add-btn"
+                    onclick="addToCart(${food.id})">
+                    + Add
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+// FILTER
+
+function filterFood(category,button) {
+
+    currentCategory = category;
+
+    document.querySelectorAll(".category-list button")
+    .forEach(btn => btn.classList.remove("active"));
+
+    button.classList.add("active");
+
+    displayFoods();
+
+}
+
+// ADD TO CART
+
+function addToCart(id) {
+
+    const food = foods.find(f => f.id === id);
+
+    const existing = cart.find(item => item.id === id);
+
+    if(existing) {
+        existing.qty++;
+    } else {
+        cart.push({...food,qty:1});
+    }
+
+    updateCart();
+
+    alert(food.name + " added to cart!");
+
+}
+
+// UPDATE CART
+
+function updateCart() {
+
+    const cartItems = document.getElementById("cartItems");
+
+    cartItems.innerHTML = "";
+
+    let total = 0;
+    let count = 0;
+
+    if(cart.length === 0) {
+        cartItems.innerHTML =
+        "<p style='text-align:center;'>Your cart is empty!</p>";
+    }
+
+    cart.forEach(item => {
+
+        total += item.price * item.qty;
+        count += item.qty;
+
+        cartItems.innerHTML += `
+
+        <div class="cart-item">
+
+            <div>
+                <strong>${item.name}</strong><br>
+                ₹${item.price} × ${item.qty}
+            </div>
+
+            <div class="quantity">
+
+                <button onclick="changeQty(${item.id},-1)">−</button>
+
+                ${item.qty}
+
+                <button onclick="changeQty(${item.id},1)">+</button>
+
+            </div>
+
+            <strong>₹${item.price * item.qty}</strong>
+
+        </div>
+
+        `;
+
+    });
+
+    document.getElementById("total").innerText = total;
+
+    document.getElementById("cartCount").innerText = count;
+
+}
+
+// CHANGE QUANTITY
+
+function changeQty(id,change) {
+
+    const item = cart.find(i => i.id === id);
+
+    if(!item) return;
+
+    item.qty += change;
+
+    if(item.qty <= 0) {
+        cart = cart.filter(i => i.id !== id);
+    }
+
+    updateCart();
+
+}
+
+// GO TO CART
+
+function goToCart() {
+
+    document.getElementById("cart").scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+// PLACE ORDER
+
+function placeOrder() {
+
+    if(cart.length === 0) {
+
+        alert("Please add food items to your cart!");
+
+        return;
+
+    }
+
+    let total = cart.reduce(
+        (sum,item) => sum + item.price * item.qty,0
+    );
+
+    const orderDetails = cart.map(item =>
+        `${item.name} x ${item.qty}`
+    ).join("\n");
+
+    alert(
+        "🎉 Order placed successfully!\n\n" +
+        orderDetails +
+        "\n\nTotal Amount: ₹" + total +
+        "\n\nThank you for ordering with Foodie!"
+    );
+
+    cart = [];
+
+    updateCart();
+
+}
+
+// INITIAL DISPLAY
+
+displayFoods();
+
+</script>
+
+</body>
+</html>
